@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Merry Christmas</title>
+    <style>
+        body{
+            background-color: antiquewhite;
+            background-image:url("snow-2620_512.gif");
+            background-size:cover;
+          
+        }
+       
+        h2 {
+           margin-top: 200px;
+           font-size: 30px;
+        }
+        /*just a Christmas card*/
+    </style>
+</head>
+
+<body>
+    <h2 style="color: darkgreen; font-family: fantasy; text-align: center;" id="otsikko">Merry Christmas</h2>
+
+    <!-- Tänne kirjoitetaan vastaus JavaScriptillä -->
+    <div id="vastaus" style="text-align: center;"></div>
+
+    <script>
+        const colors = ["#0a3d0c", "#52141b", "#2a7533", "#99252b"];
+        setInterval(function back(){
+let random = Math.floor(Math.random() * colors.length);
+document.getElementById("otsikko").style.color = colors[random];
+        }, 1000);
+
+        function nayta() {
+            fetch("https://api.thecatapi.com/v1/images/search")
+            .then(function (response) {
+                return response.json()
+            })
+            .then(function (json) {
+                document.getElementById("vastaus").innerHTML =
+               "<img src='" + json[0].url + "' alt='kissa' height='300'>";
+            })
+            .catch(function (error) {
+                    document.getElementById("vastaus").innerHTML = 
+                    "<p>Kissan haku ei onnistunut</p>";
+                })
+        }
+
+   
+  
+
+    
+
+        nayta();
+        setInterval(nayta, 3000);
+
+      
+    </script>
+
+</body>
+
+</html>
